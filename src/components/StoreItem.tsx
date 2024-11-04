@@ -1,4 +1,4 @@
-import { Card } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import formatPrice from "../utilities/formatPrice";
 
 type StoreItemProps = {
@@ -9,6 +9,7 @@ type StoreItemProps = {
 };
 
 export default function StoreItem({ id, name, price, imgUrl }: StoreItemProps) {
+  const quantity = 0;
   return (
     <Card>
       <Card.Img
@@ -21,6 +22,30 @@ export default function StoreItem({ id, name, price, imgUrl }: StoreItemProps) {
           <span className="fs-2">{name}</span>
           <span className="ms-2 text-muted">{formatPrice(price)}</span>
         </Card.Title>
+        <div className="mt-auto">
+          {quantity === 1 ? (
+            <Button className="w-100">+ Add to cart</Button>
+          ) : (
+            <div
+              className="d-flex align-items-center flex-column"
+              style={{ gap: ".5rem" }}
+            >
+              <div
+                className="d-flex align-items-center justify-content-center"
+                style={{ gap: ".5rem" }}
+              >
+                <Button>-</Button>
+                <div>
+                  <span className="fs-3">{quantity}</span> in cart
+                </div>
+                <Button>+</Button>
+              </div>
+              <Button variant="danger" size="sm">
+                Remove
+              </Button>
+            </div>
+          )}
+        </div>
       </Card.Body>
     </Card>
   );
